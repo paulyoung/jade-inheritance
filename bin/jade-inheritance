@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+var colors = require('colors');
+var JadeInheritance = require('../lib/index');
+var pjson = require(__dirname + '/../package.json');
+var program = require('commander');
+
+
+program
+  .version(pjson.version)
+  .usage('<jade file> <directory>')
+  .option('--basedir [string]', 'Required for includes and extends that use absolute paths.')
+  .option('--files', 'Instead of the inheritance tree, print an array containing the files which would be affected by a change in the input file.')
+  .parse(process.argv);
+
+
+var filename = program.args[0];
+
+if (!filename) {
+  console.log('jade-inheritance: no file provided'.red);
+  process.exit(1);
+}
+
+
+var directory = program.args[1];
+
+if (!directory) {
+  directory = '.'
+}
+
+
+options = {};
+options.basedir = program.basedir || directory;
+
+
+var inheritance = new JadeInheritance(filename, directory, options);
+var output = program.files ? inheritance.files : inheritance.tree;
+console.log(JSON.stringify(output, null, 2));

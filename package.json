@@ -1,0 +1,32 @@
+{
+  "name": "jade-inheritance",
+  "description": "Determine the inheritance of Jade templates.",
+  "url": "https://github.com/paulyoung/jade-inheritance",
+  "keywords": [
+    "jade"
+  ],
+  "version": "0.0.1",
+  "bin": {
+    "jade-inheritance": "./bin/jade-inheritance"
+  },
+  "main": "./lib/index",
+  "engines": {
+    "node": ">=0.8.x"
+  },
+  "dependencies": {
+    "colors": "0.6.2",
+    "commander": "1.2.0",
+    "glob": "3.2.6",
+    "jade": "~0.34.1"
+  },
+  "devDependencies": {
+    "coffee-script": "1.6.3"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/cake build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulyoung/jade-inheritance.git"
+  }
+}
