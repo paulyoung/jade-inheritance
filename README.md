@@ -7,7 +7,7 @@ For example, without `jade-inheritance`, a `watch` task on a directory would rec
 ## Example
 ```javascript
 var JadeInheritance = require('jade-inheritance');
-var inheritance = JadeInheritance('foo.jade');
+var inheritance = new JadeInheritance('foo.jade');
 ```
 
 ### Inheritance tree
