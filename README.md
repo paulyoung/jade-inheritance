@@ -1,5 +1,5 @@
 # jade-inheritance
-This tool can be used to reduce compilation time for Jade files.
+This tool can be used to reduce compilation time for [Jade](https://github.com/visionmedia/jade) files.
 
 For example, without `jade-inheritance`, a `watch` task on a directory would recompile all template files when any change was made within that directory. With `jade-inheritance`, only the affected files can be recompiled.
 
@@ -110,3 +110,6 @@ $ jade-inheritance --help
 ```sh
 $ npm run-script build
 ```
+
+## Possible concerns
+Currently, `jade-inheritance` depends on it's own version of [Jade](https://github.com/visionmedia/jade) to parse templates. Since `jade-inheritance` does not offer compilation, this must be done using other tools which may use a different version.
