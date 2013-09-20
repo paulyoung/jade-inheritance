@@ -117,4 +117,4 @@ $ npm run-script build
 ```
 
 ## Possible concerns
-Currently, `jade-inheritance` depends on it's own version of [Jade](https://github.com/visionmedia/jade) to parse templates. Since `jade-inheritance` does not offer compilation, this must be done using other tools which may use a different version.
+Currently, `jade-inheritance` depends on its own version of Jade to parse templates. Since `jade-inheritance` does not offer compilation, this must be done using other tools which may use a different version of Jade.
