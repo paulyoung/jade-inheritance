@@ -1,10 +1,15 @@
 # jade-inheritance
-This tool can be used to reduce compilation time for [Jade](https://github.com/visionmedia/jade) files.
+Reduce compilation time for [Jade](https://github.com/visionmedia/jade) files by understanding inheritance.
 
-For example, without `jade-inheritance`, a `watch` task on a directory would recompile all template files when any change was made within that directory. With `jade-inheritance`, only the affected files can be recompiled.
+## The problem
+When a Jade template is modified, there is no way of knowing how that change has affected the rest of a project. Other files that have extended or included the modified file also need to be compiled.
 
+As a result, common practice is to compile **all** template files to ensure that everything is up to date. This does not bode well for rapid development since files are unnecessarily being compiled and this can take a long time on a large project or if the use of inheritance and mixins is pervasive.
 
-## Example
+## The solution
+Use `jade-inheritance` to determine which files in a project extend and include modified files, and only compile those that are affected.
+
+## An example
 ```javascript
 var JadeInheritance = require('jade-inheritance');
 var inheritance = new JadeInheritance('foo.jade');
