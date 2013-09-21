@@ -9,7 +9,7 @@ program
   .version(pjson.version)
   .usage('<jade file> <directory>')
   .option('--basedir [string]', 'Required for includes and extends that use absolute paths.')
-  .option('--files', 'Instead of the inheritance tree, print an array containing the files which would be affected by a change in the input file.')
+  .option('--tree', 'Instead of an array containing the files which would be affected by a change in the input file, print the inheritance tree.')
   .parse(process.argv);
 
 
@@ -33,5 +33,5 @@ options.basedir = program.basedir || directory;
 
 
 var inheritance = new JadeInheritance(filename, directory, options);
-var output = program.files ? inheritance.files : inheritance.tree;
+var output = program.tree ? inheritance.tree : inheritance.files;
 console.log(JSON.stringify(output, null, 2));
