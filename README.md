@@ -105,7 +105,7 @@ var onChange = grunt.util._.debounce(function() {
   changedFiles = [];
 }, 200)
 
-grunt.event.on('watch.jade', function(action, filepath) {
+grunt.event.on('watch', function(action, filepath) {
   changedFiles.push(filepath);
   onChange();
 });
