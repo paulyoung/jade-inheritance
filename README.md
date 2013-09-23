@@ -67,7 +67,7 @@ grunt.initConfig({
       ],
       nospawn: true
     }
-  }
+  },
   jade: {
     compile: {
       options: {
