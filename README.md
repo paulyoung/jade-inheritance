@@ -57,6 +57,17 @@ Output:
 ```javascript
 // Gruntfile.js
 grunt.initConfig({
+  watch: {
+    jade: {
+      files: [
+        'app/**/*.jade'
+      ],
+      tasks: [
+        'jade:compile'
+      ],
+      nospawn: true
+    }
+  }
   jade: {
     compile: {
       options: {
@@ -94,7 +105,7 @@ var onChange = grunt.util._.debounce(function() {
   changedFiles = [];
 }, 200)
 
-grunt.event.on('watch', function(action, filepath) {
+grunt.event.on('watch.jade', function(action, filepath) {
   changedFiles.push(filepath);
   onChange();
 });
