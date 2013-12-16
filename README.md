@@ -92,7 +92,7 @@ var onChange = grunt.util._.debounce(function() {
   var options = grunt.config('jade.compile.options');
   var dependantFiles = [];
 
-  files.forEach(function(filename) {
+  changedFiles.forEach(function(filename) {
     var directory = options.basedir;
     var inheritance = new JadeInheritance(filename, directory, options);
     dependantFiles = dependantFiles.concat(inheritance.files);
