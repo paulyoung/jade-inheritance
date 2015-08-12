@@ -46,15 +46,13 @@ class Parser
 
         parser = new JadeParser string, file, @options
 
-        while (true)
-          try {
-            if((type = parser.peek().type) === 'eos') {
-              break;
-            }
-          } catch (e) {
-            e.message += file;
-            throw e;
-          }
+        while true
+          try
+            break if (type = parser.peek().type) is 'eos'
+          catch e
+            e.message += file
+            throw e
+
           switch type
             when 'extends', 'include'
               path = parser.expect(type).val.trim()
