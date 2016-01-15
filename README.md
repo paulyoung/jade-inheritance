@@ -1,5 +1,5 @@
 # jade-inheritance
-Reduce compilation time for [Jade](https://github.com/visionmedia/jade) files by understanding inheritance.
+Reduce compilation time for [Jade](https://github.com/pugjs/jade) files by understanding inheritance.
 
 ## The problem
 When a Jade template is modified, there is no way of knowing how that change has affected the rest of a project. Other files that have extended or included the modified file also need to be compiled.
