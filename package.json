@@ -17,13 +17,18 @@
     "colors": "0.6.2",
     "commander": "1.2.0",
     "glob": "3.2.6",
-    "jade": "~1.9.2"
+    "jade": "~1.9.2",
+    "pug-lexer": "^1.0.0",
+    "pug-parser": "^1.0.0",
+    "pug-walk": "0.0.3"
   },
   "devDependencies": {
-    "coffee-script": "1.6.3"
+    "coffee-script": "1.6.3",
+    "tape": "^4.4.0"
   },
   "scripts": {
-    "build": "./node_modules/.bin/cake build"
+    "build": "./node_modules/.bin/cake build",
+    "test": "node test/index.js"
   },
   "repository": {
     "type": "git",
