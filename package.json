@@ -1,13 +1,13 @@
 {
-  "name": "jade-inheritance",
-  "description": "Determine the inheritance of Jade templates.",
-  "url": "https://github.com/paulyoung/jade-inheritance",
+  "name": "pug-inheritance",
+  "description": "Determine the inheritance of Pug (Jade) templates.",
+  "url": "https://github.com/adammockor/pug-inheritance",
   "keywords": [
-    "jade"
+    "jade", "pug", "inheritance"
   ],
-  "version": "0.2.1",
+  "version": "1.0.0",
   "bin": {
-    "jade-inheritance": "./bin/jade-inheritance"
+    "pug-inheritance": "./bin/pug-inheritance"
   },
   "main": "./lib/index",
   "engines": {
@@ -31,6 +31,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulyoung/jade-inheritance.git"
+    "url": "https://github.com/adammockor/pug-inheritance.git"
   }
 }

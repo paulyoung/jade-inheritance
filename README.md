@@ -1,18 +1,22 @@
+This is fork of [Paul Young's](https://github.com/paulyoung) [jade-inheritance](https://github.com/paulyoung/jade-inheritance) lib migrated to new Pug parser (former Jade).
+
+---
+
 # jade-inheritance
-Reduce compilation time for [Jade](https://github.com/visionmedia/jade) files by understanding inheritance.
+Reduce compilation time for [Pug (Jade)](https://github.com/pugjs/jade) files by understanding inheritance.
 
 ## The problem
-When a Jade template is modified, there is no way of knowing how that change has affected the rest of a project. Other files that have extended or included the modified file also need to be compiled.
+When a Pug (former Jade) template is modified, there is no way of knowing how that change has affected the rest of a project. Other files that have extended or included the modified file also need to be compiled.
 
 As a result, common practice is to compile **all** template files to ensure that everything is up to date. This does not bode well for rapid development since files are unnecessarily being compiled and this can take a long time on a large project or if the use of inheritance and mixins is pervasive.
 
 ## The solution
-Use `jade-inheritance` to determine which files in a project extend and include modified files, and only compile those that are affected.
+Use `pug-inheritance` to determine which files in a project extend and include modified files, and only compile those that are affected.
 
 ## An example
 ```javascript
-var JadeInheritance = require('jade-inheritance');
-var inheritance = new JadeInheritance('foo.jade');
+var PugInheritance = require('pug-inheritance');
+var inheritance = new PugInheritance('foo.jade');
 ```
 
 ### Inheritance tree
@@ -85,7 +89,7 @@ grunt.initConfig({
 });
 
 
-var JadeInheritance = require('jade-inheritance');
+var PugInheritance = require('pug-inheritance');
 var changedFiles = [];
 
 var onChange = grunt.util._.debounce(function() {
@@ -94,7 +98,7 @@ var onChange = grunt.util._.debounce(function() {
 
   changedFiles.forEach(function(filename) {
     var directory = options.basedir;
-    var inheritance = new JadeInheritance(filename, directory, options);
+    var inheritance = new PugInheritance(filename, directory, options);
     dependantFiles = dependantFiles.concat(inheritance.files);
   });
 
@@ -113,12 +117,12 @@ grunt.event.on('watch', function(action, filepath) {
 
 ## Installation
 ```sh
-$ npm install -g jade-inheritance
+$ npm install -g pug-inheritance
 ```
 
 ## Command line usage
 ```sh
-$ jade-inheritance --help
+$ pug-inheritance --help
 ```
 
 ## Development
@@ -127,5 +131,10 @@ $ jade-inheritance --help
 $ npm run-script build
 ```
 
+### Test
+```sh
+$ npm test
+```
+
 ## Possible concerns
-Currently, `jade-inheritance` depends on its own version of Jade to parse templates. Since `jade-inheritance` does not offer compilation, this must be done using other tools which may use a different version of Jade.
+Currently, `pug-inheritance` depends on its own version of Pug to parse templates. Since `pug-inheritance` does not offer compilation, this must be done using other tools which may use a different version of Pug (Jade).
