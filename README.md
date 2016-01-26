@@ -2,7 +2,10 @@ This is fork of [Paul Young's](https://github.com/paulyoung) [jade-inheritance](
 
 ---
 
-# jade-inheritance
+# pug-inheritance
+
+[![Build Status](https://travis-ci.org/adammockor/pug-inheritance.svg?branch=master)](https://travis-ci.org/adammockor/pug-inheritance)
+
 Reduce compilation time for [Pug (Jade)](https://github.com/pugjs/jade) files by understanding inheritance.
 
 ## The problem
