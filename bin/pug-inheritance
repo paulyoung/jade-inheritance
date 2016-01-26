@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var colors = require('colors');
-var JadeInheritance = require('../lib/index');
+var PugInheritance = require('../lib/index');
 var pjson = require(__dirname + '/../package.json');
 var program = require('commander');
 
@@ -16,7 +16,7 @@ program
 var filename = program.args[0];
 
 if (!filename) {
-  console.log('jade-inheritance: no file provided'.red);
+  console.log('puh-inheritance: no file provided'.red);
   process.exit(1);
 }
 
@@ -32,6 +32,6 @@ options = {};
 options.basedir = program.basedir || directory;
 
 
-var inheritance = new JadeInheritance(filename, directory, options);
+var inheritance = new PugInheritance(filename, directory, options);
 var output = program.tree ? inheritance.tree : inheritance.files;
 console.log(JSON.stringify(output, null, 2));

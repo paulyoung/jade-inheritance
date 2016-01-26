@@ -1,9 +1,9 @@
 var test = require('tape');
 
-var JadeInheritance = require('../lib/');
+var PugInheritance = require('../lib/');
 
 var plugin = function(src) {
-  return new JadeInheritance(src, '.', {'basedir': '.'});
+  return new PugInheritance(src, '.', {'basedir': '.'});
 };
 
 test('Single file', function(t) {
