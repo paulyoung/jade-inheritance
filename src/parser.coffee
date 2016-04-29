@@ -26,6 +26,11 @@ class Parser
     @directory = directory
     @options = options
 
+    @extension = ''
+    if @options.extension
+      @extension = if @options.extension.indexOf('.') > -1 then @options.extension else '.' + @options.extension
+    else
+      @extension = '.pug'
     @cache = {}
     @files = {}
 
