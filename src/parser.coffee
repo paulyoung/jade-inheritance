@@ -30,14 +30,14 @@ class Parser
     if @options.extension
       @extension = if @options.extension.indexOf('.') > -1 then @options.extension else '.' + @options.extension
     else
-      @extension = '.pug'
+      @extension = '.jade'
     @cache = {}
     @files = {}
 
     filename = nodePath.relative @options.basedir, filename
     @addFile filename
 
-    files = glob.sync "#{@directory}/**/*.jade"
+    files = glob.sync "#{@directory}/**/*#{@extension}"
     @tree = @getInheritance filename, files
 
     files = @files
