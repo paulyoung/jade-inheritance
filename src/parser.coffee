@@ -6,19 +6,19 @@ pugLex = require 'pug-lexer'
 pugParser = require 'pug-parser'
 pugWalk = require 'pug-walk'
 
-resolvePath = (path, file, basedir, purpose) ->
-  
-  if path[0] != '/' && !file
+resolvePath = (path, file, options, purpose) ->
+
+  if path[0] != '/' && !file || path[0] != '\\' && !file
     throw new Error 'the "filename" option is required to use "' + purpose + '" with "relative" paths'
 
-  if path[0] == '/' && !basedir
+  if path[0] == '/' && !options.basedir || path[0] != '\\' && !options.basedir
     throw new Error 'the "basedir" option is required to use "' + purpose + '" with "absolute" paths'
-  
-  path = nodePath.join((if path[0] == '/' then basedir else nodePath.dirname(file)), path)
-  if (nodePath.basename(path).indexOf('.') == -1) then path += '.jade'
-  
+
+  path = nodePath.join((if path[0] == '/' || path[0] == '\\' then options.basedir else nodePath.dirname(file)), path)
+  if (nodePath.basename(path).indexOf('.') == -1) then path += options.extension
+
   return path
-  
+
 class Parser
 
   constructor: (filename, directory, options) ->
@@ -63,15 +63,15 @@ class Parser
           {string} = @cache[file]
         else
           string = @cache[file].string = fs.readFileSync file, 'utf8'
-        
-        try 
+
+        try
           pugWalk pugParser(pugLex string, file), (node) =>
-            
+
             type = node.type
             switch type
               when 'Extends', 'RawInclude'
-                path = resolvePath node.file.path, file, @options.basedir, type
-                
+                path = resolvePath node.file.path, file, @options, type
+
                 if path is nodePath.join(@options.basedir, filename)
                   if type is 'Extends'
                     relationship = 'extendedBy'
@@ -89,7 +89,7 @@ class Parser
 
                   branch[filename][relationship] ?= []
                   branch[filename][relationship].push newFile
-        
+
         catch e
           throw e
 
