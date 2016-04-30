@@ -6,16 +6,16 @@ pugLex = require 'pug-lexer'
 pugParser = require 'pug-parser'
 pugWalk = require 'pug-walk'
 
-resolvePath = (path, file, options, purpose) ->
+resolvePath = (path, file, basedir, extension, purpose) ->
 
   if path[0] != '/' && !file || path[0] != '\\' && !file
     throw new Error 'the "filename" option is required to use "' + purpose + '" with "relative" paths'
 
-  if path[0] == '/' && !options.basedir || path[0] != '\\' && !options.basedir
+  if path[0] == '/' && !basedir || path[0] != '\\' && !basedir
     throw new Error 'the "basedir" option is required to use "' + purpose + '" with "absolute" paths'
 
-  path = nodePath.join((if path[0] == '/' || path[0] == '\\' then options.basedir else nodePath.dirname(file)), path)
-  if (nodePath.basename(path).indexOf('.') == -1) then path += options.extension
+  path = nodePath.join((if path[0] == '/' || path[0] == '\\' then basedir else nodePath.dirname(file)), path)
+  if (nodePath.basename(path).indexOf('.') == -1) then path += extension
 
   return path
 
@@ -70,7 +70,7 @@ class Parser
             type = node.type
             switch type
               when 'Extends', 'RawInclude'
-                path = resolvePath node.file.path, file, @options, type
+                path = resolvePath node.file.path, file, @options.basedir, @extension, type
 
                 if path is nodePath.join(@options.basedir, filename)
                   if type is 'Extends'
