@@ -1,4 +1,5 @@
 var test = require('tape');
+var path = require('path');
 
 var PugInheritance = require('../lib/');
 
@@ -8,7 +9,7 @@ var plugin = function(src) {
 
 test('Single file', function(t) {
   var expectedResult = [
-    'test/fixtures/fixture1.jade' 
+    path.join('test','fixtures','fixture1.jade')
   ];
   
   var inheritance = plugin('test/fixtures/fixture1.jade');
@@ -19,9 +20,9 @@ test('Single file', function(t) {
 
 test('Includes', function(t) {
   var expectedResult = [
-    'test/fixtures/fixture3.jade',
-    'test/fixtures/fixture1.jade',
-    'test/fixtures/fixture2.jade'
+    path.join('test','fixtures','fixture3.jade'),
+    path.join('test','fixtures','fixture1.jade'),
+    path.join('test','fixtures','fixture2.jade'),
   ];
   
   var inheritance = plugin('test/fixtures/fixture3.jade');
@@ -31,11 +32,11 @@ test('Includes', function(t) {
 });
 
 test('Include with extends', function(t) {
-  var expectedResult = [ 
-    'test/fixtures/subfolder/fixture4.jade',
-    'test/fixtures/fixture2.jade',
-    'test/fixtures/fixture3.jade',
-    'test/fixtures/fixture1.jade' 
+  var expectedResult = [
+    path.join('test','fixtures', 'subfolder', 'fixture4.jade'),
+    path.join('test','fixtures','fixture2.jade'),
+    path.join('test','fixtures','fixture3.jade'),
+    path.join('test','fixtures','fixture1.jade'),
   ];
   
   var inheritance = plugin('test/fixtures/subfolder/fixture4.jade');
