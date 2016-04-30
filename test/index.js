@@ -43,8 +43,3 @@ test('Include with extends', function(t) {
   
   t.end();
 });
-
-test('Error in parsing', function(t) {  
-  t.throws(plugin('test/fixtures/fixture5.jade'), null, 'Should throw an error');
-  t.end();
-});
