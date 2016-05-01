@@ -19,7 +19,7 @@ test('Single file', function(t) {
 
   var inheritance = plugin('test/fixtures/fixture1.jade', baseDir);
   t.deepEqual(inheritance.files, expectedResult, 'Single file shoud be outputed');
-
+  t.deepEqual(typeof inheritance.tree, 'object', 'Pug Inheritance Tree should be an object');
   t.end();
 });
 
@@ -32,7 +32,7 @@ test('Includes', function(t) {
 
   var inheritance = plugin('test/fixtures/fixture3.jade', baseDir);
   t.deepEqual(inheritance.files, expectedResult, 'Expected files should match output');
-
+  t.deepEqual(typeof inheritance.tree, 'object', 'Pug Inheritance Tree should be an object');
   t.end();
 });
 
@@ -46,30 +46,30 @@ test('Include with extends', function(t) {
 
   var inheritance = plugin('test/fixtures/subfolder/fixture4.jade', baseDir);
   t.deepEqual(inheritance.files, expectedResult, 'Expected files should match output');
-
+  t.deepEqual(typeof inheritance.tree, 'object', 'Pug Inheritance Tree should be an object');
   t.end();
 });
 
-test('Single file with magic extension', function(t) {
+test('Single file with pug extension', function(t) {
   var expectedResult = [
-    path.join('test','fixtures','fixture1.magic'),
+    path.join('test','fixtures','fixture1.pug'),
   ];
 
-  var inheritance = plugin('test/fixtures/fixture1.magic', baseDir, '.magic');
-  t.deepEqual(inheritance.files, expectedResult, 'Single file with *.magic extension shoud be outputed');
-
+  var inheritance = plugin('test/fixtures/fixture1.pug', baseDir, '.pug');
+  t.deepEqual(inheritance.files, expectedResult, 'Single file with *.pug extension shoud be outputed');
+  t.deepEqual(typeof inheritance.tree, 'object', 'Pug Inheritance Tree should be an object');
   t.end();
 });
 
-test('Includes with magic extension', function(t) {
+test('Includes with pug extension', function(t) {
   var expectedResult = [
-    path.join('test','fixtures','fixture3.magic'),
-    path.join('test','fixtures','fixture1.magic'),
-    path.join('test','fixtures','fixture2.magic'),
+    path.join('test','fixtures','fixture3.pug'),
+    path.join('test','fixtures','fixture1.pug'),
+    path.join('test','fixtures','fixture2.pug'),
   ];
 
-  var inheritance = plugin('test/fixtures/fixture3.magic', baseDir, '.magic');
-  t.deepEqual(inheritance.files, expectedResult, 'Expected files with *.magic extension should match output');
-
+  var inheritance = plugin('test/fixtures/fixture3.pug', baseDir, '.pug');
+  t.deepEqual(inheritance.files, expectedResult, 'Expected files with *.pug extension should match output');
+  t.deepEqual(typeof inheritance.tree, 'object', 'Pug Inheritance Tree should be an object');
   t.end();
 });
