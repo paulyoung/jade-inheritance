@@ -27,7 +27,8 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/cake build",
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "wintest" : "node test/windows.js"
   },
   "repository": {
     "type": "git",
