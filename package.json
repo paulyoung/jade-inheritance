@@ -30,6 +30,9 @@
     "test": "node test/index.js",
     "wintest" : "node test/windows.js"
   },
+  "skipInheritances" : [
+    "node_modules"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/adammockor/pug-inheritance.git"

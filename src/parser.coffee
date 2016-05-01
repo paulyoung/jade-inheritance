@@ -1,6 +1,7 @@
 nodePath = require 'path'
 fs = require 'fs'
 glob = require 'glob'
+pkginfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 pugLex = require 'pug-lexer'
 pugParser = require 'pug-parser'
@@ -51,49 +52,59 @@ class Parser
     @addFile filename
     branch = {}
     branch[filename] ?= {}
+    skipInheritances = pkginfo.skipInheritances
 
     for file in files
-      do (file) =>
-        file = nodePath.normalize file
-        relativeFile = nodePath.relative @options.basedir, file
-        file = nodePath.join @options.basedir, relativeFile
-        @cache[file] ?= {}
-
-        if @cache[file].string?
-          {string} = @cache[file]
-        else
-          string = @cache[file].string = fs.readFileSync file, 'utf8'
-
-        try
-          pugWalk pugParser(pugLex string, file), (node) =>
-
-            type = node.type
-            switch type
-              when 'Extends', 'RawInclude'
-                path = resolvePath node.file.path, file, @options.basedir, @extension, type
-
-                if path is nodePath.join(@options.basedir, filename)
-                  if type is 'Extends'
-                    relationship = 'extendedBy'
-                  else if type is 'RawInclude'
-                    relationship = 'includedBy'
-
-                  newFile = {}
-
-                  if @cache[file].inheritance?
-                    {inheritance} = @cache[file]
-                  else
-                    inheritance = @cache[file].inheritance = @getInheritance relativeFile, files
-
-                  newFile = inheritance
-
-                  branch[filename][relationship] ?= []
-                  branch[filename][relationship].push newFile
-
-        catch e
-          throw e
+      if pkginfo.skipInheritances
+        for skip in skipInheritances
+          if file.indexOf(skip) == -1
+            @createInheritanceObject file, files, filename, branch
+      else
+        if file.indexOf('node_modules') == -1
+          @createInheritanceObject file, files, filename, branch
 
     return branch
+
+  createInheritanceObject: (file, files, filename, branch) ->
+    file = nodePath.normalize file
+    relativeFile = nodePath.relative @options.basedir, file
+    file = nodePath.join @options.basedir, relativeFile
+    @cache[file] ?= {}
+
+    if @cache[file].string?
+      {string} = @cache[file]
+    else
+      string = @cache[file].string = fs.readFileSync file, 'utf8'
+
+    try
+      pugWalk pugParser(pugLex string, file), (node) =>
+
+        type = node.type
+        switch type
+          when 'Extends', 'RawInclude'
+            path = resolvePath node.file.path, file, @options.basedir, @extension, type
+
+            if path is nodePath.join(@options.basedir, filename)
+              if type is 'Extends'
+                relationship = 'extendedBy'
+              else if type is 'RawInclude'
+                relationship = 'includedBy'
+
+              newFile = {}
+
+              if @cache[file].inheritance?
+                {inheritance} = @cache[file]
+              else
+                inheritance = @cache[file].inheritance = @getInheritance relativeFile, files
+
+              newFile = inheritance
+
+              branch[filename][relationship] ?= []
+              branch[filename][relationship].push newFile
+        return branch
+    catch e
+      throw e
+
 
 
   addFile: (filename) ->
