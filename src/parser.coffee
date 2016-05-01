@@ -15,7 +15,7 @@ resolvePath = (path, file, basedir, extension, purpose) ->
     throw new Error 'the "basedir" option is required to use "' + purpose + '" with "absolute" paths'
 
   path = nodePath.join((if path[0] == '/' || path[0] == '\\' then basedir else nodePath.dirname(file)), path)
-  if (nodePath.basename(path).indexOf('.') == -1) then path += extension
+  if (nodePath.basename(path).indexOf(extension) == -1) then path += extension
 
   return path
 
