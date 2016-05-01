@@ -16,7 +16,7 @@ program
 var filename = program.args[0];
 
 if (!filename) {
-  console.log('puh-inheritance: no file provided'.red);
+  console.log('pug-inheritance: no file provided'.red);
   process.exit(1);
 }
 
