@@ -32,6 +32,9 @@ class Parser
       @extension = if @options.extension.indexOf('.') > -1 then @options.extension else '.' + @options.extension
     else
       @extension = '.jade'
+
+    @skipInheritances = if @options.skip then @options.skip else pkginfo.skipInheritances
+
     @cache = {}
     @files = {}
 
@@ -55,13 +58,16 @@ class Parser
     skipInheritances = pkginfo.skipInheritances
 
     for file in files
-      if pkginfo.skipInheritances
-        for skip in skipInheritances
+      if typeof @skipInheritances == 'object'
+        for skip in @skipInheritances
           if file.indexOf(skip) == -1
             @createInheritanceObject file, files, filename, branch
-      else
-        if file.indexOf('node_modules') == -1
+      else if typeof @skipInheritances == 'string'
+        if file.indexOf(@skipInheritances) == -1
           @createInheritanceObject file, files, filename, branch
+      else
+        console.warn('Skip inheritances is not set. This may throw an error, if basedir is set to "." and pug-inheritance is resolving files also in package folders.')
+        @createInheritanceObject file, files, filename, branch
 
     return branch
 
