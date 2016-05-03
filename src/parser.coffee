@@ -1,6 +1,7 @@
 nodePath = require 'path'
 fs = require 'fs'
 glob = require 'glob'
+pkginfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 pugLex = require 'pug-lexer'
 pugParser = require 'pug-parser'
@@ -15,7 +16,7 @@ resolvePath = (path, file, basedir, extension, purpose) ->
     throw new Error 'the "basedir" option is required to use "' + purpose + '" with "absolute" paths'
 
   path = nodePath.join((if path[0] == '/' || path[0] == '\\' then basedir else nodePath.dirname(file)), path)
-  if (nodePath.basename(path).indexOf('.') == -1) then path += extension
+  if (nodePath.basename(path).indexOf(extension) == -1) then path += extension
 
   return path
 
@@ -31,6 +32,9 @@ class Parser
       @extension = if @options.extension.indexOf('.') > -1 then @options.extension else '.' + @options.extension
     else
       @extension = '.jade'
+
+    @skipInheritances = if @options.skip then @options.skip else pkginfo.skipInheritances
+
     @cache = {}
     @files = {}
 
@@ -51,49 +55,62 @@ class Parser
     @addFile filename
     branch = {}
     branch[filename] ?= {}
+    skipInheritances = pkginfo.skipInheritances
 
     for file in files
-      do (file) =>
-        file = nodePath.normalize file
-        relativeFile = nodePath.relative @options.basedir, file
-        file = nodePath.join @options.basedir, relativeFile
-        @cache[file] ?= {}
-
-        if @cache[file].string?
-          {string} = @cache[file]
-        else
-          string = @cache[file].string = fs.readFileSync file, 'utf8'
-
-        try
-          pugWalk pugParser(pugLex string, file), (node) =>
-
-            type = node.type
-            switch type
-              when 'Extends', 'RawInclude'
-                path = resolvePath node.file.path, file, @options.basedir, @extension, type
-
-                if path is nodePath.join(@options.basedir, filename)
-                  if type is 'Extends'
-                    relationship = 'extendedBy'
-                  else if type is 'RawInclude'
-                    relationship = 'includedBy'
-
-                  newFile = {}
-
-                  if @cache[file].inheritance?
-                    {inheritance} = @cache[file]
-                  else
-                    inheritance = @cache[file].inheritance = @getInheritance relativeFile, files
-
-                  newFile = inheritance
-
-                  branch[filename][relationship] ?= []
-                  branch[filename][relationship].push newFile
-
-        catch e
-          throw e
+      if typeof @skipInheritances == 'object'
+        for skip in @skipInheritances
+          if file.indexOf(skip) == -1
+            @createInheritanceObject file, files, filename, branch
+      else if typeof @skipInheritances == 'string'
+        if file.indexOf(@skipInheritances) == -1
+          @createInheritanceObject file, files, filename, branch
+      else
+        console.warn('Skip inheritances is not set. This may throw an error, if basedir is set to "." and pug-inheritance is resolving files also in package folders.')
+        @createInheritanceObject file, files, filename, branch
 
     return branch
+
+  createInheritanceObject: (file, files, filename, branch) ->
+    file = nodePath.normalize file
+    relativeFile = nodePath.relative @options.basedir, file
+    file = nodePath.join @options.basedir, relativeFile
+    @cache[file] ?= {}
+
+    if @cache[file].string?
+      {string} = @cache[file]
+    else
+      string = @cache[file].string = fs.readFileSync file, 'utf8'
+
+    try
+      pugWalk pugParser(pugLex string, file), (node) =>
+
+        type = node.type
+        switch type
+          when 'Extends', 'RawInclude'
+            path = resolvePath node.file.path, file, @options.basedir, @extension, type
+
+            if path is nodePath.join(@options.basedir, filename)
+              if type is 'Extends'
+                relationship = 'extendedBy'
+              else if type is 'RawInclude'
+                relationship = 'includedBy'
+
+              newFile = {}
+
+              if @cache[file].inheritance?
+                {inheritance} = @cache[file]
+              else
+                inheritance = @cache[file].inheritance = @getInheritance relativeFile, files
+
+              newFile = inheritance
+
+              branch[filename][relationship] ?= []
+              branch[filename][relationship].push newFile
+        return branch
+    catch e
+      throw e
+
 
 
   addFile: (filename) ->
