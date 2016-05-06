@@ -93,7 +93,7 @@ class Parser
             if path is nodePath.join(@options.basedir, filename)
               if type is 'Extends'
                 relationship = 'extendedBy'
-              else if type is 'RawInclude'
+              else if type is 'RawInclude' || type is 'Include' 
                 relationship = 'includedBy'
 
               newFile = {}
