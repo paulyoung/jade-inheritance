@@ -5,7 +5,7 @@ pkginfo = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
 class PugInheritance
   constructor: (filename, directory, options) ->
-    checkJadeVersion = new CheckJadeVersion pkginfo, '1.11.0'
+    checkJadeVersion = new CheckJadeVersion pkginfo, '1.10.0'
     options.deprecated = checkJadeVersion.deprecated
     parser = new Parser filename, directory, options
     @tree = parser.tree
