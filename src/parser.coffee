@@ -87,13 +87,13 @@ class Parser
 
         type = node.type
         switch type
-          when 'Extends', 'RawInclude'
+          when 'Extends', (if @options.deprecated then 'Include' else 'RawInclude')
             path = resolvePath node.file.path, file, @options.basedir, @extension, type
 
             if path is nodePath.join(@options.basedir, filename)
               if type is 'Extends'
                 relationship = 'extendedBy'
-              else if type is 'RawInclude'
+              else if type is 'RawInclude' || type is 'Include' 
                 relationship = 'includedBy'
 
               newFile = {}
