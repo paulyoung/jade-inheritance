@@ -24,9 +24,11 @@ class CheckJadeVersion
       if result.index == @regex.lastIndex
         @regex.lastIndex++;
 
-    if version.indexOf(result[0]) != -1
-      cleanedVersion = version.replace(result[0], '')
-
-    return cleanedVersion
+    if typeof result == 'object'
+      if version.indexOf(result[0]) != -1
+        cleanedVersion = version.replace(result[0], '')
+      return cleanedVersion
+    else
+      return version
 
 module.exports = CheckJadeVersion
