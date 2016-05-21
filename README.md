@@ -123,11 +123,11 @@ grunt.event.on('watch', function(action, filepath) {
 
   - `options.basedir = 'app'`
 
-    Defines the root, from where pug-inheritance starts to scan for all `\*.jade` files in all existing folders within the set basedir.
+    Defines the root, from where pug-inheritance starts to scan for all `\*.jade` files in all existing folders within the basedir.
 
     ```javascript
     var options {
-      extension: '.pug',
+      basedir: 'app'
     }
     ```
 
@@ -139,7 +139,7 @@ grunt.event.on('watch', function(action, filepath) {
 
     ```javascript
     var options {
-      extension: '.pug',
+      extension: '.pug'
     }
     ```
 
@@ -155,14 +155,12 @@ grunt.event.on('watch', function(action, filepath) {
       skip: ['node_modules', 'some_other_folder']
     }
     ```
-    If you want to set this global, youare able set this option also into your `package.json`. But watch out, this will be overwritten by setting this option directly to the pug-inheritance object.
+    If you want to set this global, you are able set this option also into your `package.json`. But watch out, this will be overwritten by setting this option directly to the pug-inheritance object.
     ```JSON
     {
-      ...
       "skipInheritances": [
         "node_modules"
       ]
-      ...
     }
     ```
 
