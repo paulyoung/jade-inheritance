@@ -118,6 +118,54 @@ grunt.event.on('watch', function(action, filepath) {
 });
 ```
 
+## Options
+
+
+  - `options.basedir = 'app'`
+
+    Defines the root, from where pug-inheritance starts to scan for all `\*.jade` files in all existing folders within the set basedir.
+
+    ```javascript
+    var options {
+      extension: '.pug',
+    }
+    ```
+
+  - `options.extension = '.pug',`
+
+    Defines the used file extension. This option was integrated because of the conversion of Jade to Pug.
+    If you are using `\*.jade` as extension you can leave this option aside, but if you allready
+    switched to `.\*pug` you need to set this option.
+
+    ```javascript
+    var options {
+      extension: '.pug',
+    }
+    ```
+
+  - `options.skip = 'node_modules'`
+
+    If you are using the root folder `options.basedir = '.'` to process your `\*.jade` files, you have to skip `node_modules`. Because of dependant PUG-packages which may contain test files, that may cause errors during the compile.
+    This option accepts a string or an array.
+    ```javascript
+    var options {
+      // as string
+      skip: 'node_modules',
+      // or as array
+      skip: ['node_modules', 'some_other_folder']
+    }
+    ```
+    If you want to set this global, youare able set this option also into your `package.json`. But watch out, this will be overwritten by setting this option directly to the pug-inheritance object.
+    ```JSON
+    {
+      ...
+      "skipInheritances": [
+        "node_modules"
+      ]
+      ...
+    }
+    ```
+
 ## Installation
 ```sh
 $ npm install -g pug-inheritance
