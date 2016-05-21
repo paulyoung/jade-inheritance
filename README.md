@@ -123,7 +123,7 @@ grunt.event.on('watch', function(action, filepath) {
 
   - `options.basedir = 'app'`
 
-    Defines the root, from where pug-inheritance starts to scan for all `\*.jade` files in all existing folders within the basedir.
+    Defines the root, from where pug-inheritance starts to scan for all `*.jade` files in all existing folders within the basedir.
 
     ```javascript
     var options {
@@ -134,8 +134,8 @@ grunt.event.on('watch', function(action, filepath) {
   - `options.extension = '.pug',`
 
     Defines the used file extension. This option was integrated because of the conversion of Jade to Pug.
-    If you are using `\*.jade` as extension you can leave this option aside, but if you allready
-    switched to `.\*pug` you need to set this option.
+    If you are using `*.jade` as extension you can leave this option aside, but if you allready
+    switched to `.*pug` you need to set this option.
 
     ```javascript
     var options {
@@ -145,7 +145,7 @@ grunt.event.on('watch', function(action, filepath) {
 
   - `options.skip = 'node_modules'`
 
-    If you are using the root folder `options.basedir = '.'` to process your `\*.jade` files, you have to skip `node_modules`. Because of dependant PUG-packages which may contain test files, that may cause errors during the compile.
+    If you are using the root folder `options.basedir = '.'` to process your `*.jade` files, you have to skip `node_modules`. Because of dependant PUG-packages which may contain test files, that may cause errors during the compile.
     This option accepts a string or an array.
     ```javascript
     var options {
