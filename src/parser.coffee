@@ -82,7 +82,7 @@ class Parser
       string = @cache[file].string = fs.readFileSync file, 'utf8'
 
     try
-      pugWalk pugParser(pugLex string, file), (node) =>
+      pugWalk pugParser(pugLex string, {filename: file}), (node) =>
 
         type = node.type
         switch type
