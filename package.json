@@ -16,16 +16,16 @@
   "dependencies": {
     "colors": "1.1.2",
     "commander": "2.9.0",
-    "glob": "6.0.4",
-    "pug-lexer": "^1.0.0",
-    "pug-parser": "^1.0.0",
+    "glob": "7.0.5",
+    "pug-lexer": "^2.0.3",
+    "pug-parser": "^2.0.1",
     "pug-walk": "0.0.3",
-    "semver": "^5.1.0",
+    "semver": "^5.3.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "coffee-script": "1.10.0",
-    "tape": "^4.4.0"
+    "tape": "^4.6.0"
   },
   "scripts": {
     "build": "./node_modules/.bin/cake build",
