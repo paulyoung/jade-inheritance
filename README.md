@@ -134,12 +134,11 @@ grunt.event.on('watch', function(action, filepath) {
   - `options.extension = '.pug',`
 
     Defines the used file extension. This option was integrated because of the conversion of Jade to Pug.
-    If you are using `*.jade` as extension you can leave this option aside, but if you allready
-    switched to `.*pug` you need to set this option.
+    If you allready use `*.pug` as file extension you can leave this option aside, but if you still use `*.jade` you need to set this option.
 
     ```javascript
     var options {
-      extension: '.pug'
+      extension: '.pug' // Default is '.pug'
     }
     ```
 
