@@ -16,15 +16,15 @@
   "dependencies": {
     "colors": "1.1.2",
     "commander": "2.9.0",
-    "glob": "7.0.5",
+    "glob": "7.1.0",
     "pug-lexer": "^2.0.3",
     "pug-parser": "^2.0.1",
-    "pug-walk": "0.0.3",
+    "pug-walk": "1.0.0",
     "semver": "^5.3.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "coffee-script": "1.10.0",
+    "coffee-script": "1.11.1",
     "tape": "^4.6.0"
   },
   "scripts": {

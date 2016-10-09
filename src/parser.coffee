@@ -31,7 +31,7 @@ class Parser
     if @options.extension
       @extension = if @options.extension.indexOf('.') > -1 then @options.extension else '.' + @options.extension
     else
-      @extension = '.jade'
+      @extension = '.pug'
 
     @skipInheritances = if @options.skip then @options.skip else pkginfo.skipInheritances
 
