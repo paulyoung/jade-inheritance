@@ -24,7 +24,7 @@ class CheckJadeVersion
       if result.index == @regex.lastIndex
         @regex.lastIndex++;
 
-    if typeof result == 'object'
+    if result && typeof result == 'object'
       if version.indexOf(result[0]) != -1
         cleanedVersion = version.replace(result[0], '')
       return cleanedVersion
