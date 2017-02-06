@@ -14,7 +14,7 @@ class CheckJadeVersion
       switch key
         when 'jade', 'pug', 'gulp-pug', 'jade-pug'
           cleanedVersion = @cleanUpVersion(@allDependencies[key]);
-          @deprecated = compareVersion.lt(versionComparator, cleanedVersion);
+          @deprecated = cleanedVersion == 'latest' || compareVersion.lt(versionComparator, cleanedVersion);
     return @deprecated
 
   cleanUpVersion: (version) ->
