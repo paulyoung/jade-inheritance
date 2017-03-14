@@ -1,22 +1,24 @@
 {
   "name": "pug-inheritance",
-  "description": "Determine the inheritance of Pug (Jade) templates.",
+  "description": "Determine the inheritance of Pug templates.",
   "url": "https://github.com/adammockor/pug-inheritance",
   "keywords": [
-    "jade", "pug", "inheritance"
+    "pug",
+    "inheritance"
   ],
   "version": "2.0.2",
   "bin": {
     "pug-inheritance": "./bin/pug-inheritance"
   },
-  "main": "./lib/index",
+  "main": "./src/index",
   "engines": {
-    "node": ">=0.8.x"
+    "node": ">=4.0.0"
   },
   "dependencies": {
     "colors": "1.1.2",
     "commander": "2.9.0",
     "glob": "7.1.0",
+    "pug-dependency": "~1.0.1",
     "pug-lexer": "^2.0.3",
     "pug-parser": "^2.0.1",
     "pug-walk": "1.0.0",
@@ -24,11 +26,9 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "coffee-script": "1.11.1",
     "tape": "^4.6.0"
   },
   "scripts": {
-    "build": "./node_modules/.bin/cake build",
     "test": "node test/index.js"
   },
   "skipInheritances": [

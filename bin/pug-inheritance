@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 var colors = require('colors');
-var PugInheritance = require('../lib/index');
+var PugInheritance = require('../src/index');
 var pjson = require(__dirname + '/../package.json');
 var program = require('commander');
 
 
 program
   .version(pjson.version)
-  .usage('<jade file> <directory>')
+  .usage('<pug file> <directory>')
   .option('--basedir [string]', 'Required for includes and extends that use absolute paths.')
   .option('--tree', 'Instead of an array containing the files which would be affected by a change in the input file, print the inheritance tree.')
   .parse(process.argv);
