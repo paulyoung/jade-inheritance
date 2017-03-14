@@ -1,32 +1,41 @@
 {
-  "name": "jade-inheritance",
-  "description": "Determine the inheritance of Jade templates.",
-  "url": "https://github.com/paulyoung/jade-inheritance",
+  "name": "pug-inheritance",
+  "description": "Determine the inheritance of Pug templates.",
+  "url": "https://github.com/adammockor/pug-inheritance",
   "keywords": [
-    "jade"
+    "pug",
+    "inheritance"
   ],
-  "version": "0.2.1",
+  "version": "3.0.0-beta.0",
   "bin": {
-    "jade-inheritance": "./bin/jade-inheritance"
+    "pug-inheritance": "./bin/pug-inheritance"
   },
-  "main": "./lib/index",
+  "main": "./src/index",
   "engines": {
-    "node": ">=0.8.x"
+    "node": ">=4.0.0"
   },
   "dependencies": {
-    "colors": "0.6.2",
-    "commander": "1.2.0",
-    "glob": "3.2.6",
-    "jade": "~1.9.2"
+    "colors": "1.1.2",
+    "commander": "2.9.0",
+    "glob": "7.1.1",
+    "pug-dependency": "~1.0.1",
+    "pug-lexer": "^3.0.0",
+    "pug-parser": "^2.0.2",
+    "pug-walk": "1.1.1",
+    "semver": "^5.3.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "coffee-script": "1.6.3"
+    "tape": "^4.6.3"
   },
   "scripts": {
-    "build": "./node_modules/.bin/cake build"
+    "test": "node test/index.js"
   },
+  "skipInheritances": [
+    "node_modules"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulyoung/jade-inheritance.git"
+    "url": "https://github.com/adammockor/pug-inheritance.git"
   }
 }
